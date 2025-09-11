@@ -1,0 +1,21 @@
+{
+    "name": "currency-converter-cli",
+    "version": "1.0.0",
+    "description": "currency converter using external API and CLI por inputs and outputs",
+    "main": "app.js",
+    "type": "module",
+    "scripts": {
+        "dev": "nodemon app.js"
+    },
+    "author": "burnogama",
+    "license": "ISC",
+    "devDependencies": {
+        "nodemon": "^3.1.10"
+    },
+    "dependencies": {
+        "@prisma/client": "^6.16.1",
+        "axios": "^1.11.0",
+        "dotenv": "^17.2.2",
+        "prisma": "^6.16.1"
+    }
+}
