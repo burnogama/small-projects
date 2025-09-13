@@ -2,7 +2,7 @@ import "dotenv/config";
 import { storeRates } from "./src/queryHelper.js";
 import printMenu from "./src/printMenu.js";
 import { validateAmount, validateCurrency } from "./src/validationHelper.js";
-import convertCurrency from "./src/convertCurrency.js";
+import { convertCurrency, printOptions } from "./src/convertCurrency.js";
 
 import * as readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
@@ -21,7 +21,7 @@ async function getAnswer(question, errorMessage, validateFunction) {
     return answer;
 }
 
-async function startApp() {
+export async function startApp() {
     printMenu();
 
     const base = await getAnswer(
@@ -42,6 +42,8 @@ async function startApp() {
     );
 
     convertCurrency(base, currency, amount);
+
+    printOptions(startApp);
 }
 
 startApp();

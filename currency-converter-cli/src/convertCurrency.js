@@ -1,15 +1,16 @@
 import { getRates } from "./queryHelper.js";
+
 import { rl } from "../app.js";
 
 const rates = await getRates();
 
-export default async function convertCurrency(base, currency, amount) {
+export async function convertCurrency(base, currency, amount) {
     let currencyConverted = "";
 
     //convert chosen currency to EUR (2 decimals and convert to float)
     let newBase = 1 / rates[base];
 
-    if (base === "eur" && currency === "eur") {
+    if (base === currency) {
         newBase = amount;
         currencyConverted = amount;
     } else if (base === "eur") {
@@ -29,7 +30,9 @@ export default async function convertCurrency(base, currency, amount) {
     console.log("What would you like to do next?");
     console.log("1 - Make another conversion");
     console.log("2 - Exit\n");
+}
 
+export async function printOptions(startApp) {
     let answer = await rl.question("Choose one to continue... ");
 
     switch (answer) {
@@ -38,8 +41,12 @@ export default async function convertCurrency(base, currency, amount) {
             break;
         case "2": {
             console.clear();
+            rl.close();
             process.exit(0);
         }
-        default: //Debug to not accept invalid inputs
+        default: {
+            console.log("Invalid option, try again...");
+            printResult();
+        }
     }
 }
